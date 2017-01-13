@@ -1,5 +1,14 @@
 import json
 import argparse
+import os
+
+"""This functions accesses the individual variant files by storing the path"""
+def readVarFiles():
+    varData = []
+    path = "/Users/mathuser2/Documents/work/vcf_to_ga/output/variantSet/variants/"
+    for file in os.listdir(path):
+        if file.endswith(".txt"):
+            varData.append(path+file)
 
 if __name__ == '__main__':
     #sets command line input file 
@@ -20,12 +29,15 @@ if __name__ == '__main__':
     datasetId = loadItems['datasetId']
     _id = loadItems['id']
 
-    d = [[]]
 
     for item in loadItems:
         items.append(item)
+    """GA4GH object does not contain VCF version so just assigning 4.1 for now"""
+    print "##fileformat=VCFv4.1"
+    print "##name=",name
+    readVarFiles()
 
     """Separating the items in metadata"""
-    for x,y in enumerate(metadata):
-        print "##INFO=<ID=",y['id'],"Number=",y['number'],"Type=",y['type'],"Description=",y['description'],"Info=",y['info'],"value=", y['value'],"key=", y['key'],">"
-        
+    #for x,y in enumerate(metadata):
+        #print "##INFO=<ID=",y['id'],"Number=",y['number'],"Type=",y['type'],"Description=",y['description'],"Info=",y['info'],"value=", y['value'],"key=", y['key'],">"
+  

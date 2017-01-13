@@ -14,6 +14,7 @@ if __name__ == '__main__':
     #sets command line input file 
     parser = argparse.ArgumentParser()
     parser.add_argument("-i", "--input", help="Input file")
+    #need to add path argument here
     p = parser.parse_args()
     assert p.input
 
@@ -34,10 +35,10 @@ if __name__ == '__main__':
         items.append(item)
     """GA4GH object does not contain VCF version so just assigning 4.1 for now"""
     print "##fileformat=VCFv4.1"
-    print "##name=",name
+    print "##name={name}".format(name=name)
     readVarFiles()
 
     """Separating the items in metadata"""
-    #for x,y in enumerate(metadata):
-        #print "##INFO=<ID=",y['id'],"Number=",y['number'],"Type=",y['type'],"Description=",y['description'],"Info=",y['info'],"value=", y['value'],"key=", y['key'],">"
+    for x,y in enumerate(metadata):
+        print "##INFO=<ID={id}".format(id=y['id']),"Number={number}".format(number=y['number']),"Type={type}".format(type=y['type']),"Description={description}".format(description=y['description']),"Info={info}".format(info=y['info']),"value={value}".format(value=y['value']),"key={key}>".format(key=y['key'])
   

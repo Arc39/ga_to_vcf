@@ -1,6 +1,6 @@
 class converter(AbstractConverter):
 
-	def writeHeader(self,opFile):
+	def writeHeader(self):
 		variantSet = self._container
         print("##fileformat=VCFv4.1")
         print("##datasetid={datasetid}".format(datasetid=variantSet.dataset_id))
@@ -11,14 +11,12 @@ class converter(AbstractConverter):
         print("#CHROM POS ID REF ALT QUAL FILTER INFO")
 
 	
-	def writeVariants(self,opFile):
+	def writeVariants(self):
 		varIter = self._objectIterator
 
 		for variant in varIter:
-			opfile.write(variant)
+			print variant
 
 	def writeVCF(self):
-		opFile = open(self._outputFile, 'w')
 		self.writeHeader(opfile)
 		self.writeVariants(opfile)
-		opfile.close()
